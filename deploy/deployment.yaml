@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "my-name-app-deployment"
+  namespace: training
+  labels:
+    app: "my-name-app"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "my-name-app"
+  template:
+    metadata:
+      labels:
+        app: "my-name-app"
+    spec:
+      containers:
+        - name: "my-name-app-container"
+          image: "609180424093.dkr.ecr.ap-southeast-2.amazonaws.com/my-name-app:0.0.1-SNAPSHOT"
+          resources:
+            limits:
+              cpu: 1
+              memory: 1000Mi
+            requests:
+              cpu: 0.5
+              memory: 400Mi

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-name-app-ingress
+  namespace: training
+  labels:
+    app: "my-name-app"
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/whitelist-source-range: "0.0.0.0/0"
+spec:
+  tls:
+    - hosts:
+        - "my-name-app.svc.platform.myobdev.com"
+      secretName: "my-name-app-tls"
+  rules:
+    - host: "my-name-app.svc.platform.myobdev.com"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: "my-name-app-service"
+                port:
+                  number: 80
