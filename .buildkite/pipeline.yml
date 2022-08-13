@@ -2,5 +2,3 @@ steps:
 
   - label: 'Run tests'
     command: docker-compose run --rm test
-    agents:
-      queue: "sab-preprod-dflt"
